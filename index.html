@@ -2,33 +2,29 @@
 <html>
 <head>
 <title>Config</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 $(function (){
-    var apiUrl = "https://api.wunderlist.com";
-    var token;
-    $('#submit').click(function (e){
+    $('#submit').click(clickCallback);
+});
+function clickCallback(e){
+  var apiUrl = "https://api.wunderlist.com";
+  var returnUri = "pebblejs://close#";
+  var email = $('#email').val();
+  var password = $('#password').val();
 
-      var email = $('#email').val()
-      var password = $('#password').val()
-
-      $.post( apiUrl+"/login", {email: email, password: password} )
-      .done(function( data ) {
-        alert( "Token: " + data.token);
-        token = data.token;
-      })
-      .fail(function() {
-        alert( "Invaild email or password please try again." );
-      });
-
-      var json = JSON.stringify({token: token})
-      var uri = "pebblejs://close#"+json
-
-      console.log(uri)
-      document.location = uri
-
-      })
-    })
+  $.post( apiUrl+"/login", {email: email, password: password} )
+  .done(function( data ) {
+      console.log(email);
+      console.log(data);
+      var json = JSON.stringify({name: data.name, email: data.email, token: data.token}, null, 0);
+      console.log(json);
+      document.location = returnUri+json;
+  })
+  .fail(function() {
+    alert( "Invaild email or password please try again." );
+  });
+}
 </script>
 </head>
 <body>
