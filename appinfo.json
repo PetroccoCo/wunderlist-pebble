@@ -1,0 +1,15 @@
+{
+  "uuid": "6941003d-c10f-4fe6-a1bc-4055ab2c7791",
+  "shortName": "Wunderlist",
+  "longName": "Wunderlist for Pebble",
+  "companyName": "Pete Winterscheidt",
+  "versionCode": 1,
+  "versionLabel": "1.0.0",
+  "watchapp": {
+    "watchface": false
+  },
+  "resources": {
+    "media": []
+  }
+  "capabilities": [ "configurable" ],
+}
