@@ -6,7 +6,7 @@ Pebble.addEventListener("ready",
 Pebble.addEventListener("showConfiguration",
     function(e) {
         console.log("showConfiguration called!");
-        Pebble.openURL();
+        Pebble.openURL(https://basejumper9.github.io/wunderlist-pebble/);
     }
 );
 Pebble.addEventListener("webviewclosed",
