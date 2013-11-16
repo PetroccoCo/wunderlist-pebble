@@ -17,7 +17,7 @@ def configure(ctx):
 def build(ctx):
     ctx.load('pebble_sdk')
 
-    ctx.pbl_program(source=ctx.path.ant_glob('src/**/*.c'),
+    ctx.pbl_program(source=ctx.path.ant_glob('src/**/todo_list.c'),
                     target='pebble-app.elf')
 
     ctx.pbl_bundle(elf='pebble-app.elf',

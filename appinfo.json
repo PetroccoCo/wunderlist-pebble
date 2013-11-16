@@ -3,13 +3,21 @@
   "shortName": "Wunderlist",
   "longName": "Wunderlist for Pebble",
   "companyName": "Pete Winterscheidt",
+  "capabilities": [ "configurable" ],
   "versionCode": 1,
   "versionLabel": "1.0.0",
+  "appKeys": {
+    "append": "0",
+    "delete": "1",
+    "move":   "2",
+    "toggle": "3",
+    "fetch":  "4"
+  },
   "watchapp": {
     "watchface": false
   },
   "resources": {
-    "media": []
+    "media": [
+    ]
   }
-  "capabilities": [ "configurable" ],
 }
