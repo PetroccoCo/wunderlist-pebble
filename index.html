@@ -5,13 +5,23 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 $(function (){
-
-    var text = window.location.hash
+    var apiUrl = "https://api.wunderlist.com";
+    var token;
     $('#submit').click(function (e){
 
       var email = $('#email').val()
       var password = $('#password').val()
-      var json = JSON.stringify({email:email, password:password})
+
+      $.post( apiUrl+"/login", {email: email, password: password} )
+      .done(function( data ) {
+        alert( "Token: " + data.token);
+        token = data.token;
+      })
+      .fail(function() {
+        alert( "Invaild email or password please try again." );
+      });
+
+      var json = JSON.stringify({token: token})
       var uri = "pebblejs://close#"+json
 
       console.log(uri)
@@ -24,9 +34,11 @@ $(function (){
 <body>
 <h1>Config</h1>
 
-<form>
-  <label>Email:</label><input type="text" id="email"></input>
-  <label>Password:</label><input type="PASSWORD" id="password"></input>
+<form action="javascript:void(0);">
+  <label>Email:</label><input type="text" id="email" />
+  <br />
+  <label>Password:</label><input type="PASSWORD" id="password" />
+  <br />
   <button id="submit">Submit</button>
 </form>
 </body>
