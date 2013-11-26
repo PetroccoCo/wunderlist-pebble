@@ -1,28 +1,37 @@
 function readyCallback(e) {
-  console.log("Hello world! - Sent from your javascript application.");
+  if (supports_html5_storage()) {
+    var confString = localStorage.getItem("config");
+    if (confString != null) {
+      console.log(confString);
+      configuration = JSON.parse(confString);
+    } else {
+      console.log("No saved configuration!");
+    }
+  } else {
+    console.log("localStorage not supported!");
+  }
 }
 
 function showConfigurationCallback(e) {
-  console.log("showConfiguration called!");
-  var url = "https://basejumper9.github.io/wunderlist-pebble/";
+  var url = "http://basejumper9.github.io/wunderlist-pebble/index.html";
   Pebble.openURL(url);
 }
 
 function webviewclosedCallback(e) {
-  try {
-    var configuration = JSON.parse(e.response);
-    console.log("Configuration window returned: ", configuration);
-    console.log("Configuration window returned: " + e.configurationData);
-    console.log("webview closed");
-    console.log(e.type);
     console.log(e.response);
-  } catch (ignored) {}
+    if (supports_html5_storage()){
+      localStorage.setItem('config', e.response);
+    }
+    configuration = JSON.parse(e.response);
+    console.log("Configuration window returned: ", configuration);
 }
 
 function appmessageCallback(e) {
-  console.log(e.type);
-  console.log(e.payload.temperature);
   console.log("message!");
+  console.log("obj: " + e);
+  console.log("type: " + e.type);
+  console.log("payload: " + e.payload);
+  console.log("payload pp: " + JSON.stringify(e.payload, null, 2));
 }
 
 Pebble.addEventListener("ready", readyCallback);
@@ -41,7 +50,7 @@ function supports_html5_storage() {
 function sendGet(url) {
   var client = new XMLHttpRequest();
   client.open('GET', url);
-  client.setRequestHeader('X-Test', 'one');
+  client.setRequestHeader('Authorization', 'Bearer '+configuration.token);
   var target = this;
   client.onload  = function() {target.parseJSON(req, url)};
   client.send();
