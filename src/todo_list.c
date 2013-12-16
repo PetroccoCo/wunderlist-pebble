@@ -12,8 +12,8 @@ enum {
   TODO_KEY_FETCH,
 };
 
-#define MAX_TODO_LIST_ITEMS (10)
-#define MAX_ITEM_TEXT_LENGTH (16)
+#define MAX_TODO_LIST_ITEMS (100)
+#define MAX_ITEM_TEXT_LENGTH (124)
 
 typedef enum {
   TodoListItemStateIncomplete = 0x00,
